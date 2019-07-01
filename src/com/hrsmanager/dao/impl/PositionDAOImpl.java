@@ -23,7 +23,7 @@ public class PositionDAOImpl extends JdbcDaoSupport implements PositionDAO{
 	
 	@Override
 	public PositionInfo findPositionInfo(Integer position_id) {
-		String sql = "select *from Positions p where p.position_id = ?)";
+		String sql = "select *from Positions p where p.position_id = ?";
 		Object[]params = new Object[] {position_id};
 		PositionMapper mapper = new PositionMapper();
 		try {

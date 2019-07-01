@@ -23,7 +23,7 @@ public class StatusDAOImpl extends JdbcDaoSupport implements StatusDAO {
 		
 	@Override
 	public Status findStatus(Integer status_id) {
-		String sql = "select *from Status s where s.status_id = ?)";
+		String sql = "select *from Status s where s.status_id = ?";
 		Object[]params = new Object[] {status_id};
 		StatusMapper mapper = new StatusMapper();
 		try {

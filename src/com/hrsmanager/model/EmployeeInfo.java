@@ -28,7 +28,7 @@ public class EmployeeInfo {
 		this.birthday = birthday;
 		this.phone = phone;
 		this.email = email;
-		this.password = id.toString();
+		this.password = password;
 		this.created_at = new Timestamp(System.currentTimeMillis());
 		this.updated_at = this.created_at;
 		this.password = String.valueOf(this.employee_id);

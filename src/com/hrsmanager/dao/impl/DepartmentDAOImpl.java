@@ -23,7 +23,7 @@ public class DepartmentDAOImpl extends JdbcDaoSupport implements DepartmentDAO{
 	
 	@Override
 	public DepartmentInfo findDepartmentInfo(Integer department_id) {
-		String sql = "select *from Departments d where d.department_id = ?)";
+		String sql = "select *from Departments d where d.department_id = ?";
 		Object[]params = new Object[] {department_id};
 		DepartmentMapper mapper = new DepartmentMapper();
 		try {

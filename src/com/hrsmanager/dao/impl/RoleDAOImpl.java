@@ -23,7 +23,7 @@ public class RoleDAOImpl extends JdbcDaoSupport implements RoleDAO{
 	
 	@Override
 	public Roles findRoles(Integer role_id) {
-		String sql = "select *from Roles r where r.role_id = ?)";
+		String sql = "select *from Roles r where r.role_id = ?";
 		Object[]params = new Object[] {role_id};
 		RoleMapper mapper = new RoleMapper();
 		try {

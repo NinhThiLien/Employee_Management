@@ -22,7 +22,7 @@ public class EmployeeDAOImpl extends JdbcDaoSupport implements EmployeeDAO{
 	}
 	
 	@Override
-	public EmployeeInfo findEmployeeInfo(Integer employee_id) {
+	public EmployeeInfo findEmployeeInfoByID(Integer employee_id) {
 		String sql = "Select * from Employees emp where emp.employee_id = ? ";
 		Object[] params = new Object[] {employee_id};
 		EmployeeMapper mapper = new EmployeeMapper();
@@ -34,4 +34,29 @@ public class EmployeeDAOImpl extends JdbcDaoSupport implements EmployeeDAO{
 		}
 	}
 	
+	@Override
+	public EmployeeInfo findEmployeeInfoByEmail(String email) {
+		String sql = "Select * from Employees emp where emp.email = ?";
+		Object[] params = new Object[] {email};
+		EmployeeMapper mapper = new EmployeeMapper();
+		try {
+			EmployeeInfo emp = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return emp;
+		}catch(EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
+	
+	@Override
+	public EmployeeInfo findEmployeeInfoByEP(String email, String password) {
+		String sql = "Select * from Employees emp where emp.email = ? and emp.password =?";
+		Object[] params = new Object[] {email, password};
+		EmployeeMapper mapper = new EmployeeMapper();
+		try {
+			EmployeeInfo emp = this.getJdbcTemplate().queryForObject(sql, params, mapper);
+			return emp;
+		}catch(EmptyResultDataAccessException e) {
+			return null;
+		}
+	}
 }

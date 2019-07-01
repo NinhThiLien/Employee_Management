@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-  		<div class="col-sm-10"><h1 class="text-center">User name</h1></div>
+  		<div class="col-sm-10"><h1 class="text-center">${emp.employee_name}</h1></div>
     </div><br><br>
     <div class="row">
   		<div class="col-sm-3"><!--left col-->
@@ -10,7 +10,7 @@
 
 			<div class="panel panel-default">
 				<div class="panel-heading">Position</div>
-				<div class="panel-body"></div>
+				<div class="panel-body">${position}</div>
 			</div>
 		</div><!--/col-3-->
     	
@@ -28,7 +28,7 @@
 	             			<label class="col-sm-4 control-label" for="EmployeeID">EmployeeID</label>  
 	             			<div class="col-sm-5">
 	             				<h4 class="">
-	             					20142531
+	             					${emp.employee_id}
 	             				</h4>
 	             			</div>
 	             		</div>
@@ -37,7 +37,7 @@
 	             			<label class="col-sm-4 control-label" for="Name (Full name)">Name (Full name)</label>  
 	             			<div class="col-sm-5">
 	             				<h4 class="">
-	             					Ninh Thi Lien
+	             					${emp.employee_name}
 	             				</h4>
 	             			</div>
 	             		</div>
@@ -46,7 +46,7 @@
 	             			<label class="col-sm-4 control-label" for="Date Of Birth">Date Of Birth</label>  
 	             			<div class="col-sm-5">
 	             				<h4 class="">
-	             					01/01/1996
+	             					${emp.birthday}
 	             				</h4>
 	             			</div>
 	             		</div>
@@ -55,7 +55,7 @@
 							<label class="col-sm-4 control-label" for="Gender">Gender</label>
 							<div class="col-sm-5"> 
 	             				<h4 class="">
-	             					Female
+	             					${emp.gender}
 	             				</h4>
 							</div>
 						</div>
@@ -64,7 +64,7 @@
 							<label class="col-sm-4 control-label col-xs-12" for="Permanent Address">Permanent Address</label>  
 							<div class="col-sm-5"> 
 	             				<h4 class="">
-	             					xxx
+	             					${emp.address}
 	             				</h4>
 							</div>
 						</div>
@@ -73,7 +73,7 @@
 	             			<label class="col-sm-4 control-label" for="Phone number">Phone number</label>
 							<div class="col-sm-5"> 
 	             				<h4 class="">
-	             					xxx
+	             					${emp.phone}
 	             				</h4>
 							</div>
 	             		</div>
@@ -82,7 +82,7 @@
 	             			<label class="col-sm-4 control-label" for="Email Address">Email Address</label>
 							<div class="col-sm-5"> 
 	             				<h4 class="">
-	             					xxx
+	             					${emp.email}
 	             				</h4>
 							</div>
 	             		</div>
@@ -91,7 +91,7 @@
 	             			<label class="col-sm-4 control-label" for="Started Day">Started Day</label>
 							<div class="col-sm-5"> 
 	             				<h4 class="">
-	             					mm/dd/yyyy
+	             					${emp.started_day}
 	             				</h4>
 							</div>
 	             		</div>

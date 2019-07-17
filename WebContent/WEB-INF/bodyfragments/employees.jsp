@@ -54,12 +54,14 @@
 	        	</div>
 	        </div>
         </div>
-		
+		<% String type = null; %>
 		<div class="col-md-1" style="padding:0px">
-	        <a href="#">
+	        <a href="${pageContext.request.contextPath}/list">
 				<img src="<c:url value="/resources/img/button_list.png"/>" alt="" width="42" height="42"/>
 			</a>
-	        <a href="#">
+	        <a href="${pageContext.request.contextPath}/card">
+	        	<% type = "card"; %>
+	        	<%request.setAttribute("type",type); %>
 				<img src="<c:url value="/resources/img/button_card.png"/>" alt="" width="42" height="42">
 			</a>
         </div>
@@ -75,10 +77,12 @@
                     78</span>
             </div>
             <div class="panel-body">
-                <%@include file="employees_list.jsp" %>
+            	<%if ((String) request.getAttribute("type") == "card"){ %>
+                	<%@include file="employees_list.jsp"%>
+                <%} else {%>
+                	<%@include file="employees_list.jsp"%>
+                <%} %>
             </div>
         </div>
     </div>
 </div>
-
-

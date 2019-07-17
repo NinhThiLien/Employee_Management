@@ -15,7 +15,7 @@ import com.hrsmanager.authentication.EmployeeService;
 import com.hrsmanager.model.EmployeeInfo;
 
 @Controller
-public class LoginController {
+public class AuthenticationController {
 
 	@Autowired
 	EmployeeService employeeService;
@@ -28,6 +28,11 @@ public class LoginController {
 	@RequestMapping(value = {"/login_check"}, method = RequestMethod.POST)
 	public String check_login(Model model, HttpServletRequest request, HttpServletResponse reponse,
 			@RequestParam(value ="email") String email, @RequestParam(value ="password") String password) {
+		String errorString = null;
+		if(email!= null || password != null) {
+			errorString = "Email and Password can not null or empty";
+			request.setAttribute("error", errorString);
+		}
 		EmployeeInfo emp = employeeService.findByEmailPass(email,password);
 		HttpSession session = request.getSession();
 		if (emp != null) {
@@ -40,6 +45,12 @@ public class LoginController {
 			request.setAttribute("error", error);
 			return "login";
 		}
+	}
+	
+	/*--------------Logout-------------*/
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logout(Model model) {
+		return "redirect:/login";
 	}
 	
 }

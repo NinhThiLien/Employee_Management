@@ -49,9 +49,25 @@ public class EmployeeController {
 	@RequestMapping(value = {"/employees"}, method = RequestMethod.GET)
 	public String listEmployee(Model model,HttpServletRequest request) {
 		List<EmployeeInfo> list = employeeService.listEmployee();
-		request.setAttribute("list", list);
+		String type = (String) request.getAttribute("type");
+		model.addAttribute("type", type);
+		model.addAttribute("list", list);
 		return "employees";
 	}
+	
+	@RequestMapping(value = {"/list"}, method = RequestMethod.GET)
+	public String listEmp(Model model,HttpServletRequest request) {
+		List<EmployeeInfo> list = employeeService.listEmployee();
+		request.setAttribute("list", list);
+		return "employees_list";
+	}
+	
+	/*@RequestMapping(value = {"/card"}, method = RequestMethod.GET)
+	public String cardEmp(Model model,HttpServletRequest request) {
+		List<EmployeeInfo> list = employeeService.listEmployee();
+		request.setAttribute("list", list);
+		return "employees_card";
+	}*/
 	
 	@RequestMapping(value = {"/employee/{id}"}, method = RequestMethod.GET)
 	public String profile(@PathVariable int id, Model model) {

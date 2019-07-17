@@ -42,6 +42,7 @@ public class EmployeeService implements UserDetailsService {
 		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+role_name);
 		
 		UserDetails userDetails = (UserDetails) new User (emp.getEmail(), emp.getPassword(), Arrays.asList(authority));
+		System.out.println(userDetails);
 		return userDetails;
 	}
 	

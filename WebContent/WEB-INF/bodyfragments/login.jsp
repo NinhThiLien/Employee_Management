@@ -9,6 +9,7 @@
 					<div class="row">
 						<div class="col-xs-6">
 							<h3>Login</h3>
+							<p style="color: red;">${errorString}</p>
 						</div>
 					</div>
 					<hr>
@@ -35,7 +36,6 @@
 										</div>
 									</div>
 								</div>
-								<p style="color: red;">${message}</p>
 								<div class="form-group">
 									<div class="row">
 										<div class="col-lg-12">

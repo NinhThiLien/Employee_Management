@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
 		auth.userDetailsService(employeeService);
-		System.out.println(auth.userDetailsService(employeeService));
+		System.out.println(auth.userDetailsService(employeeService).getUserDetailsService());
 	}
 	
 	private CsrfTokenRepository csrfTokenRepository() 
@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    http.csrf()
 	    	.csrfTokenRepository(csrfTokenRepository());
 		http.authorizeRequests().antMatchers("/","/login","/logout","/newemployee").anonymous();
-		/*http.authorizeRequests().antMatchers("/employee/{id}").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");;*/
+		/*http.authorizeRequests().antMatchers("/employee/{id}").access("hasRole('ROLE_USER')");*/
 		
 		http.authorizeRequests().and().formLogin()
 		.loginPage("/login")

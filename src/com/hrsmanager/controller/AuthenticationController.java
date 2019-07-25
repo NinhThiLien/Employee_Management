@@ -1,5 +1,7 @@
 package com.hrsmanager.controller;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -27,29 +29,41 @@ public class AuthenticationController {
 	
 	@RequestMapping(value = {"/login_check"}, method = RequestMethod.POST)
 	public String check_login(Model model, HttpServletRequest request, HttpServletResponse reponse,
-			@RequestParam(value ="email") String email, @RequestParam(value ="password") String password) {
+			@RequestParam(value ="email") String email, @RequestParam(value ="password") String password) throws SQLException {
 		String errorString = null;
-		if(email!= null || password != null) {
+		boolean hasError = false;
+		EmployeeInfo emp = null;
+		
+		if(email== null || password == null) {
+			hasError = true;
 			errorString = "Email and Password can not null or empty";
 			request.setAttribute("error", errorString);
+		} else {
+			emp = employeeService.findByEmailPass(email,password);
+			if (emp == null) {
+				hasError = true;
+				errorString = "Email or password invalid";
+			}
 		}
-		EmployeeInfo emp = employeeService.findByEmailPass(email,password);
-		HttpSession session = request.getSession();
-		if (emp != null) {
+		
+		if(hasError) {
+			request.setAttribute("emp", null);
+			request.setAttribute("errorString", errorString);
+			return "login";
+		}
+		else {
+			HttpSession session = request.getSession();
 			session.setAttribute("emp", emp);
 			String id = emp.getEmployee_id().toString();
 			return "redirect:/employee/" + id;
-		}
-		else {
-			String error = "Incorrect Email or Passowrd";
-			request.setAttribute("error", error);
-			return "login";
 		}
 	}
 	
 	/*--------------Logout-------------*/
 	@RequestMapping(value="/logout", method = RequestMethod.GET)
-	public String logout(Model model) {
+	public String logout(Model model,HttpServletRequest request, HttpServletResponse reponse) {
+		HttpSession session = request.getSession();
+		session.setAttribute("emp", null);
 		return "redirect:/login";
 	}
 	

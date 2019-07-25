@@ -2,7 +2,7 @@ package com.hrsmanager.authentication;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +38,14 @@ public class EmployeeService implements UserDetailsService {
 		
 		Roles role = roleDAO.findRolesByID(emp.getRole_id());
 		String role_name = role.getRole_name();
+		List<GrantedAuthority> grantList= new ArrayList<GrantedAuthority>();
 	
 		GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_"+role_name);
 		
-		UserDetails userDetails = (UserDetails) new User (emp.getEmail(), emp.getPassword(), Arrays.asList(authority));
-		System.out.println(userDetails);
+		grantList.add(authority);
+		
+		UserDetails userDetails = (UserDetails) new User (emp.getEmail(), emp.getPassword(), grantList);
+		System.out.println(userDetails.getAuthorities());
 		return userDetails;
 	}
 	
@@ -78,11 +81,11 @@ public class EmployeeService implements UserDetailsService {
 
 	public EmployeeInfo findByEmailPass(String email, String password) {
 		String password_check = employeeDAO.findPassword(email);
-		System.out.println(password_check);
+		EmployeeInfo emp = null;
 		if(BCrypt.checkpw(password, password_check)==false){
-			throw new UsernameNotFoundException("Incorrect Passowrd");
+			return emp;
 		}else {
-			EmployeeInfo emp = employeeDAO.findEmployeeInfoByEmail(email);
+			emp = employeeDAO.findEmployeeInfoByEmail(email);
 			return emp;
 		}
 	}

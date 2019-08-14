@@ -1,3 +1,4 @@
+<%@ page import="com.hrsmanager.model.EmployeeInfo, com.hrsmanager.dao.impl.*,java.util.List" %>
 <style>
 #team .card {
     border: none;
@@ -165,3 +166,17 @@
 		</div>
 	</section>
 </div>
+
+<div>
+	<ul>
+		<% 
+			int total_pages= (int)session.getAttribute("total_pages");
+			for(int k = 1 ; k<=total_pages; k++){
+				request.setAttribute("pageid", k); %>
+			<ul>
+				<li><a href="${pageContext.request.contextPath}/employees"><%=k%></a></li>
+			</ul>
+		<% }%>
+	</ul>
+</div>
+ 

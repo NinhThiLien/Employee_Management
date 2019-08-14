@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.hrsmanager.authentication.EmployeeService;
 import com.hrsmanager.model.DepartmentInfo;
 import com.hrsmanager.dao.DepartmentDAO;
+import com.hrsmanager.dao.EmployeeDAO;
 import com.hrsmanager.dao.PositionDAO;
 import com.hrsmanager.dao.RoleDAO;
 import com.hrsmanager.dao.StatusDAO;
@@ -47,6 +48,9 @@ public class EmployeeController {
 	@Autowired
 	private RoleDAO roleDAO;
 	
+	@Autowired
+	private EmployeeDAO empDAO;
+	
 	@RequestMapping(value = {"/employees"}, method = RequestMethod.GET)
 	public String listEmployee(Model model,HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -60,10 +64,26 @@ public class EmployeeController {
 				List<EmployeeInfo> list = employeeService.listEmployee();
 				List<DepartmentInfo> listDepartments = departmentDAO.listDeapartments();
 				List<PositionInfo> listPositions = positionDAO.listPositions();
+				int total = list.size();
+				int total_view = 6;
+				int total_pages = 0;
+				int first = (int)(request.getAttribute("pageid"));
+				if (request.getParameter("pageid")!=null) {
+					first = Integer.parseInt(request.getParameter("pageid"));
+				}
+				if((total % total_view)<=0) {
+					total_pages = total/total_view;
+				} else {
+					total_pages = total/total_view + 1;
+				}				
+				List<EmployeeInfo> listByPage = empDAO.listEmployeeByPage((first-1)*total_view, total_view);
 				model.addAttribute("listDepartments", listDepartments);
 				model.addAttribute("listPositions", listPositions);
 				model.addAttribute("list", list);
 				model.addAttribute("total", list.size());
+				model.addAttribute("total_pages", total_pages);
+				model.addAttribute("listByPage", listByPage);
+				
 				return "employees";
 			}else {
 				return "redirect:/employee/"+emp_login.getEmployee_id().toString();

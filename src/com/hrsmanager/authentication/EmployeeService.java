@@ -104,6 +104,11 @@ public class EmployeeService implements UserDetailsService {
 		return list;
 	}
 	
+	public List<EmployeeInfo> listPage(int pageId, int total){
+		List<EmployeeInfo> listPage = employeeDAO.listPage(pageId, total);
+		return listPage;
+	}
+	
 	public int newEmployeeInfo(EmployeeInfo emp,Integer department_id, Integer position_id, Integer role_id, Integer status_id, Date started_day ) {
 		emp.setStarted_day(started_day);
 		emp.setRoleId(role_id);

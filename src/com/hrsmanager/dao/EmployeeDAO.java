@@ -19,4 +19,5 @@ public interface EmployeeDAO {
 	public int createEmployeeInfo(EmployeeInfo emp);
 	public int updatePassword(Integer employee_id, String password);
 	public List<EmployeeInfo> listEmployee();
+	public List<EmployeeInfo> listPage(int pageId, int total);
 }

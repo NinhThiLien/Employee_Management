@@ -28,7 +28,7 @@
         </div>
         
         <div class="col-md-1">
-	        <button type="button" class="button2" onclick="location.href='employee/new'" title="Add">
+	        <button type="button" class="button2" onclick="location.href='${pageContext.request.contextPath}/employee/new'" title="Add">
 	            <span class="glyphicon glyphicon-plus"></span> Add
 	        </button>
         </div>
@@ -64,4 +64,41 @@
             </div>
         </div>
     </div>
+    
+    <div>
+	<% int totalPage = (int)session.getAttribute("totalPage");
+		int back = 0;
+		int next = 0;
+		int page_pre = (int)request.getAttribute("page_pre");
+		if(totalPage<=3){
+			for (int pageId=1; pageId<= totalPage; pageId++){%>
+			<button class="btn btn-default"><a href="${pageContext.request.contextPath}/employees/<%=pageId%>"><i><%=pageId%></i></a></button>
+			<%}
+		}else{
+		//Nut Back
+		if (page_pre != 1){
+			back =page_pre-1;
+		%>
+			<button class="btn btn-default"><a href="${pageContext.request.contextPath}/employees/1"><i>First</i></a></button>
+			<button class="btn btn-default"><a href="${pageContext.request.contextPath}/employees/<%=back%>"><i>Back</i></a></button>
+		<%} else {
+			back = 1;
+		}
+		//Hien Thi Trang
+		if (page_pre+2 <= totalPage){
+			for (int pageId=page_pre; pageId<= page_pre+2; pageId++){%>
+				<button class="btn btn-default"><a href="${pageContext.request.contextPath}/employees/<%=pageId%>"><i><%=pageId%></i></a></button>
+			<%}
+			next=page_pre+3;
+			if (next<=totalPage){%>
+				<button class="btn btn-default"><a href="${pageContext.request.contextPath}/employees/<%=page_pre+1%>"><i>Next</i></a></button>
+			<%}
+		}else{
+			for (int pageId=(totalPage-3); pageId<= totalPage-1; pageId++){%>
+				<button class="btn btn-default"><a href="${pageContext.request.contextPath}/employees/<%=pageId%>"><i><%=pageId%></i></a></button>
+			<%}
+		}%>
+		<button class="btn btn-default"><a href="${pageContext.request.contextPath}/employees/<%=totalPage%>"><i>Last</i></a></button>
+		<%}%>
+	</div>
 </div>

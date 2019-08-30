@@ -231,7 +231,7 @@
 		             			<label class="col-sm-4 control-label" ></label>  
 		             			<div class="col-sm-5">
 		             				<input type="submit" class="btn btn-success" value="Submit">
-	             					<a href="/Employee_Management/employees" class="btn btn-danger">
+	             					<a onclick="window.history.back()" class="btn btn-danger">
 	             						<span class="glyphicon glyphicon-remove-sign"></span> Cancel
 	             					</a>
 		             			</div>

@@ -3,7 +3,7 @@
 <div class="list-group">
 	<section id="team" class="pb-5">
 		<div class="row">
-		<c:forEach items="${list}" var="employee">
+		<c:forEach items="${listPage}" var="employee">
 			<div class="col-xs-12 col-sm-6 col-md-4">
 	           <div class="image-flip">
 	               <div class="mainflip">
@@ -31,7 +31,7 @@
 	                               		 | 
 	                               		<c:forEach items="${listPositions}" var="posi">
 	                               			<c:if test="${posi.positionId == employee.positionId}">
-	                  	            			Positon: ${posi.positionName}
+	                  	            			Position: ${posi.positionName}
 	                               			</c:if>
 	                               		</c:forEach>
 	                               	</p>
